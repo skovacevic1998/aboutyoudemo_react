@@ -1,0 +1,184 @@
+/* Background styles */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #181818;
+  z-index: -1;
+}
+
+/* Navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  align-items: center;
+  color: white;
+  background-color: #181818;
+  height: 64px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.navbar.loaded {
+  opacity: 1;
+}
+
+/* Logo styles */
+.about-you {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo letter styles */
+.logo-letter {
+  font-size: 24px;
+  color: white;
+  margin-right: 3px;
+}
+
+/* Logo circle styles */
+.logo-circle {
+  font-size: 24px;
+  color: white;
+  animation: fadeInOut 1s infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.grid-item:hover {
+  transform: scale(1.2);
+}
+
+.category-content {
+  position: fixed;
+  top: 64px;
+  z-index: 9999;
+  margin-right: 25px;
+  border-radius: 5px;
+  padding: 10px;
+  color: black;
+  background-color: #ffffffbe;
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.category-content.active {
+  opacity: 1;
+  visibility: visible;
+  width: 14vw;
+  z-index: 1;
+  animation: fadeInAnimation 0.3s ease-in-out, fadeInOutContent 0.3s ease-in-out;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.aboutyou-content {
+  min-height: 100%;
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+  margin-left: 16vw;
+  margin-right: 16vw;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.aboutyou-content.loaded {
+  opacity: 1;
+  animation: fadeInOutContent 1s ease-in-out;
+}
+
+@keyframes fadeInOutContent {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.carousel-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.typography-custom {
+  color: white;
+}
+
+.footer {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.footer.loaded {
+  opacity: 1;
+  animation: fadeInOutContent 1s ease-in-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.productContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.productContainer .productDescription {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease; /* Transition for smooth animation */
+}
+
+.productContainer:hover .productDescription {
+  max-height: 1000px; /* Adjust as needed based on the maximum height of your content */
+  opacity: 1;
+}
+
