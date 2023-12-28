@@ -21,7 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoaded(true);
@@ -40,47 +40,66 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`navbar ${loaded ? "loaded" : ""}`}
       justifyContent="center"
       textAlign="center"
-      sx={{ "& > *": { flex: "1 1 auto" } }} // Equal width for each item
+      sx={{ "& > *": { flex: "1 1 auto" } }}
+      wrap="nowrap"
     >
-      <Grid item xs={3} sm={3} md={1} className="grid-item">
-        <GenderType
-          label="Žene"
-          handleShowContent={handleShowCategoryContent}
-        />
+      <Grid container md={3} justifyContent={"center"}>
+        <Grid item className="grid-item">
+          <GenderType
+            label="Žene"
+            handleShowContent={handleShowCategoryContent}
+          />
+        </Grid>
+        <Grid item className="grid-item">
+          <GenderType
+            label="Muškarci"
+            handleShowContent={handleShowCategoryContent}
+          />
+        </Grid>
+        <Grid item className="grid-item">
+          <GenderType
+            label="Djeca"
+            handleShowContent={handleShowCategoryContent}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={3} sm={3} md={1} className="grid-item">
-        <GenderType
-          label="Muškarci"
-          handleShowContent={handleShowCategoryContent}
-        />
-      </Grid>
-      <Grid item xs={3} sm={3} md={1} className="grid-item">
-        <GenderType
-          label="Djeca"
-          handleShowContent={handleShowCategoryContent}
-        />
-      </Grid>
-      <Grid item xs={6} sm={6} md={4} className="grid-item">
+      <Grid item md={6} className="grid-item">
+        {/* Logo */}
         <div className={`logo ${loaded ? "fade-in" : ""}`}>
           <Button disableRipple onClick={() => handleNavigate("/")}>
             <Logo />
           </Button>
         </div>
       </Grid>
-      <Grid item xs={3} sm={3} md={1} className="grid-item">
-        <IconButton disableRipple style={{ color: "white" }} onClick={() => handleNavigate("/profile")}>
-          <PersonIcon />
-        </IconButton>
-      </Grid>
-      <Grid item xs={3} sm={3} md={1} className="grid-item">
-        <IconButton disableRipple style={{ color: "white" }} onClick={() => handleNavigate("/favorites")}>
-          <FavoriteIcon />
-        </IconButton>
-      </Grid>
-      <Grid item xs={3} sm={3} md={1} className="grid-item">
-        <IconButton disableRipple style={{ color: "white" }} onClick={() => handleNavigate("/cart")}>
-          <ShoppingBagIcon />
-        </IconButton>
+      <Grid container md={3} justifyContent={"center"}>
+        {/* Icons with navigation */}
+        <Grid item className="grid-item">
+          <IconButton
+            disableRipple
+            style={{ color: "white" }}
+            onClick={() => handleNavigate("/profile")}
+          >
+            <PersonIcon />
+          </IconButton>
+        </Grid>
+        <Grid item className="grid-item">
+          <IconButton
+            disableRipple
+            style={{ color: "white" }}
+            onClick={() => handleNavigate("/favorites")}
+          >
+            <FavoriteIcon />
+          </IconButton>
+        </Grid>
+        <Grid item className="grid-item">
+          <IconButton
+            disableRipple
+            style={{ color: "white" }}
+            onClick={() => handleNavigate("/cart")}
+          >
+            <ShoppingBagIcon />
+          </IconButton>
+        </Grid>
       </Grid>
     </Grid>
   );
