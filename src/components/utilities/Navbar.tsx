@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <IconButton
             disableRipple
             style={{ color: "white" }}
-            onClick={() => handleNavigate("/cart")}
+            onClick={() => handleNavigate("/shoppingcart")}
           >
             <ShoppingBagIcon />
           </IconButton>

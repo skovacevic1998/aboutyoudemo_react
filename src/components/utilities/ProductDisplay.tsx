@@ -60,7 +60,7 @@ export const ProductDisplay: React.FC<ProductDisplayProps> = ({ product }) => {
                 onClick={() => console.log(`Buy ${product.name}`)}
                 color="secondary"
               >
-                Buy
+                Dodaj u košaricu
               </Button>
             </Grid>
           </Grid>

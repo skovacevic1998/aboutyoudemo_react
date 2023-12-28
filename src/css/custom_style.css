@@ -193,3 +193,24 @@
   transform: scale(1);
 }
 
+.cartContainer {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: black;
+}
+
+.heading {
+  color: black;
+}
+
+.emptyCartText {
+  color: black;
+}
+
+.text {
+  color: black;
+}
+
+.totalPrice {
+  color: black;
+}
