@@ -13,13 +13,7 @@ import {
   Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import { Product } from "../../redux/types/types";
 
 interface ShoppingCartProps {
   cartItems: Product[];
@@ -33,7 +27,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
   const [orderNumber, setOrderNumber] = useState<number | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + item.product_price * item.product_availability,
     0
   );
 
@@ -41,7 +35,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
     const randomOrderNumber = Math.floor(Math.random() * 100000);
     setOrderNumber(randomOrderNumber);
     setOrderConfirmed(true);
-    removeFromCart(-1); // Pass a special id (-1) to indicate order confirmation
+    removeFromCart(-1);
   };
 
   return (
@@ -60,10 +54,10 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
             <React.Fragment key={item.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar alt={item.name} />
+                  <Avatar alt={item.product_name} />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={item.name}
+                  primary={item.product_name}
                   secondary={
                     <React.Fragment>
                       <Typography
@@ -71,14 +65,14 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
                         className="text"
                         color="textPrimary"
                       >
-                        Količina: {item.quantity}
+                        Količina: {item.product_availability}
                       </Typography>
                       <Typography
                         variant="body2"
                         className="text"
                         color="textPrimary"
                       >
-                        Cijena: {item.price * item.quantity}€
+                        Cijena: {item.product_price * item.product_availability}€
                       </Typography>
                     </React.Fragment>
                   }

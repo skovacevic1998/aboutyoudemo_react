@@ -24,4 +24,5 @@ const categorySlice = createSlice({
 });
 
 export const { setCategoryData } = categorySlice.actions;
+
 export default categorySlice.reducer;

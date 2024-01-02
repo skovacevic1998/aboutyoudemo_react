@@ -1,22 +1,26 @@
-import React, { useState } from "react";
-import {
-  Grid,
-  Typography,
-  Button,
-} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, Typography, Button } from "@mui/material";
 import { ProductDisplay } from "../utilities/ProductDisplay";
 import { useLocation } from "react-router-dom";
-
-interface Product {
-  name: string;
-  image: string;
-  price: number;
-  description: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { Action, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState } from "../../redux/store/store";
+import { fetchProductsData } from "../../redux/actions/actions";
+import { Product } from "../../redux/types/types";
 
 export const GenericShopping: React.FC = () => {
   const location = useLocation();
-  const decodedTitle = decodeURIComponent(location.pathname).replace(/\//g, " - ");
+
+  const decodedTitle = decodeURIComponent(location.pathname).replace(
+    /\//g,
+    " - "
+  );
+  const categoryForAPI = decodeURIComponent(location.pathname).replace(
+    /\//g,
+    ""
+  );
+
+  const dispatch = useDispatch<ThunkDispatch<RootState, unknown, Action>>();
 
   const [page, setPage] = useState(0);
   const productsPerPage = 8;
@@ -25,97 +29,21 @@ export const GenericShopping: React.FC = () => {
     setPage(newPage);
   };
 
+  const productList = useSelector((state: RootState) => state.products);
 
-  const productList: Product[] = [
-    {
-      name: "Product Name",
-      image:
-        "https://s13emagst.akamaized.net/products/40646/40645023/images/res_3848caf5926b3e18944b38d23478694c.jpg",
-      price: 100,
-      description: "Product Descriptionawddddddddddddddddddddddddddd dw awdadwawdawdawdaawdhijahfdglahfdsghal kashdflaesuhufihasdkjfh askdjhfluehalhsdjfklh asldfhueihaklshdfkljh kahwdjh",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://iq.mikesport.com/cdn/shop/products/f5c9c017494c943311ca615f45d5de75.png?v=1701743568",
-      price: 90,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://static.ticimax.cloud/3402/uploads/urunresimleri/buyuk/nike-downshifter-11-siyahsimli-0be-40.jpg",
-      price: 120,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://s13emagst.akamaized.net/products/40646/40645023/images/res_3848caf5926b3e18944b38d23478694c.jpg",
-      price: 100,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://iq.mikesport.com/cdn/shop/products/f5c9c017494c943311ca615f45d5de75.png?v=1701743568",
-      price: 90,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://static.ticimax.cloud/3402/uploads/urunresimleri/buyuk/nike-downshifter-11-siyahsimli-0be-40.jpg",
-      price: 120,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://s13emagst.akamaized.net/products/40646/40645023/images/res_3848caf5926b3e18944b38d23478694c.jpg",
-      price: 100,
-      description: "Product Descriptionawddddddddddddddddddddddddddd dw awdadwawdawdawdaawdhijahfdglahfdsghal kashdflaesuhufihasdkjfh askdjhfluehalhsdjfklh asldfhueihaklshdfkljh kahwdjh",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://iq.mikesport.com/cdn/shop/products/f5c9c017494c943311ca615f45d5de75.png?v=1701743568",
-      price: 90,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://static.ticimax.cloud/3402/uploads/urunresimleri/buyuk/nike-downshifter-11-siyahsimli-0be-40.jpg",
-      price: 120,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://s13emagst.akamaized.net/products/40646/40645023/images/res_3848caf5926b3e18944b38d23478694c.jpg",
-      price: 100,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://iq.mikesport.com/cdn/shop/products/f5c9c017494c943311ca615f45d5de75.png?v=1701743568",
-      price: 90,
-      description: "Product Description",
-    },
-    {
-      name: "Product Name",
-      image:
-        "https://static.ticimax.cloud/3402/uploads/urunresimleri/buyuk/nike-downshifter-11-siyahsimli-0be-40.jpg",
-      price: 120,
-      description: "Product Description",
-    },
-  ];
+  const slicedProductList = Array.isArray(productList)
+    ? productList.slice(
+        page * productsPerPage,
+        page * productsPerPage + productsPerPage
+      )
+    : [];
+
+  useEffect(() => {
+    console.log(categoryForAPI);
+    dispatch(fetchProductsData(categoryForAPI));
+  }, [dispatch, categoryForAPI]);
 
   const totalPageCount = Math.ceil(productList.length / productsPerPage);
-
-  const slicedProductList = productList.slice(page * productsPerPage, page * productsPerPage + productsPerPage);
 
   return (
     <>
@@ -131,11 +59,19 @@ export const GenericShopping: React.FC = () => {
         </Grid>
         <Grid item md={12}>
           <Grid container spacing={2}>
-            {slicedProductList.map((product, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                <ProductDisplay product={product} />
+            {Array.isArray(productList) ? (
+              productList.map((product: any, index: number) => (
+                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                  <ProductDisplay product={product} />
+                </Grid>
+              ))
+            ) : (
+              <Grid item>
+                <Typography variant="body1" color="white">
+                  No products available
+                </Typography>
               </Grid>
-            ))}
+            )}
           </Grid>
           <Grid container justifyContent="center" marginTop={3}>
             <Grid item>

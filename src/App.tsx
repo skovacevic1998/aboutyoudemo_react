@@ -8,38 +8,11 @@ import {
   ShoppingCart,
 } from "./components";
 import "./css/custom_style.css";
-
-interface Product {
-  name: string;
-  image: string;
-  price: number;
-  description: string;
-}
-
-interface CartProduct extends Product {
-  id: number;
-  quantity: number;
-}
+import { Product } from "./redux/types/types";
 
 function App(): JSX.Element {
-  const [cartItems, setCartItems] = useState<CartProduct[]>([
-    {
-      id: 1,
-      name: "Product 1",
-      image: "path/to/product1.jpg",
-      price: 20,
-      description: "Description of Product 1",
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      image: "path/to/product2.jpg",
-      price: 30,
-      description: "Description of Product 2",
-      quantity: 1,
-    },
-    // Add more items as needed...
+  const [cartItems, setCartItems] = useState<Product[]>([
+    
   ]);
   const removeFromCart = (id: number) => {
     const updatedCart = id === -1 ? [] : cartItems.filter((item) => item.id !== id);

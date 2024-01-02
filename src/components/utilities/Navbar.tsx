@@ -72,7 +72,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </Grid>
       <Grid container md={3} justifyContent={"center"}>
-        {/* Icons with navigation */}
         <Grid item className="grid-item">
           <IconButton
             disableRipple

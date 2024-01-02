@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import categoryReducer from "./categorySlice";
+import categoryReducer from "../slice/categorySlice";
+import productsReducer from "../slice/productsSlice";
 
 const persistConfig = {
   key: "root",
@@ -9,11 +10,14 @@ const persistConfig = {
   blacklist: [],
 };
 
-const persistedReducer = persistReducer(persistConfig, categoryReducer);
+const persistedCategoryReducer = persistReducer(persistConfig, categoryReducer);
+const persistedProductsReducer = persistReducer(persistConfig, productsReducer);
+
 
 const store = configureStore({
   reducer: {
-    category: persistedReducer,
+    category: persistedCategoryReducer,
+    products: persistedProductsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

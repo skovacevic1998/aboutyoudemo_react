@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/configureStore";
-import { fetchCategoryData } from "../../redux/categoryActions";
+import { RootState } from "../../redux/store/store";
+import { fetchCategoryData } from "../../redux/actions/actions";
 import { Action } from "redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
