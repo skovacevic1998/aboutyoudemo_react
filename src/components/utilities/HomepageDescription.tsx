@@ -7,7 +7,7 @@ export const HomepageDescription: React.FC = () => {
         <Typography className="typography-custom">
           Velik izbor, jednostavna narudžba - moda za žene online na ABOUT YOU
         </Typography>
-        <br/>
+        <br />
         <Typography className="typography-custom">
           Ljubav prema šopingu ide uz dame kao palac i nokat. U području ženske
           mode ABOUT YOU je najbolji odabir. Velik izbor različitih brendova
@@ -18,7 +18,7 @@ export const HomepageDescription: React.FC = () => {
           ga besplatno vratiti. Gornji dijelovi i jakne - moda za žene potpuno
           prema tvom ukusu
         </Typography>
-        <br/>
+        <br />
         <Typography className="typography-custom">
           Svejedno radi li se o bluzi, haljini ili majici: na ABOUT YOU pronaći
           ćeš sve za usklađen look. Na raspolaganju ti je veliki izbor veličina
@@ -29,7 +29,7 @@ export const HomepageDescription: React.FC = () => {
           čine tvoju jaknu ili kaput apsolutnim must-have komadima za tvoj
           ormar. Elegantne hlače
         </Typography>
-        <br/>
+        <br />
         <Typography className="typography-custom">
           Trebaju ti hlače za određenu priliku ili jednostavno samo želiš
           nadopuniti svoj ormar? Pogledaj izbor na ABOUT YOU. Velik izbor hlača
@@ -40,7 +40,7 @@ export const HomepageDescription: React.FC = () => {
           veličinu proizvođača za određeni model. Doista lakše ne postoji.
           Neophodno za svaku damu
         </Typography>
-        <br/>
+        <br />
         <Typography className="typography-custom">
           Bilo da su cipele s visokom potpeticom ili tenisice one jednostavno
           imaju čarobnu privlačnost za žene. Odgovarajuće modele za proljeće,
@@ -48,7 +48,7 @@ export const HomepageDescription: React.FC = () => {
           za toplijim vremenom. U čizmama i gležnjačama biti će ti toplo i
           udobno u jesen i po zimi. Modni dodaci da upotpuniš svoj outfit
         </Typography>
-        <br/>
+        <br />
         <Typography className="typography-custom">
           Što bi bila moda za žene bez modnih dodataka? Nakit, naočale, šeširi i
           torbice iz najobičnijih basic komada stvaraju odličan outfit. Ukoliko

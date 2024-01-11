@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Grid, Typography, Button } from "@mui/material";
 import { ProductDisplay } from "../utilities/ProductDisplay";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Action, ThunkDispatch } from "@reduxjs/toolkit";
-import { RootState } from "../../redux/store/store";
-import { fetchProductsData } from "../../redux/actions/actions";
 import { Product } from "../../redux/types/types";
+import axios from "axios";
 
 export const GenericShopping: React.FC = () => {
   const location = useLocation();
@@ -20,30 +17,30 @@ export const GenericShopping: React.FC = () => {
     ""
   );
 
-  const dispatch = useDispatch<ThunkDispatch<RootState, unknown, Action>>();
-
   const [page, setPage] = useState(0);
   const productsPerPage = 8;
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 
-  const productList = useSelector((state: RootState) => state.products);
-
-  const slicedProductList = Array.isArray(productList)
-    ? productList.slice(
-        page * productsPerPage,
-        page * productsPerPage + productsPerPage
-      )
-    : [];
+  const [productList, setProductList] = useState<Product[]>([]);
+  const [totalPageCount, setTotalPageCount] = useState(0);
 
   useEffect(() => {
-    console.log(categoryForAPI);
-    dispatch(fetchProductsData(categoryForAPI));
-  }, [dispatch, categoryForAPI]);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/products/${categoryForAPI}?page=${page}&size=${productsPerPage}`
+        );
+        const { content, totalPages } = response.data;
+        setProductList(content);
+        setTotalPageCount(totalPages);
+      } catch (error) {}
+    };
 
-  const totalPageCount = Math.ceil(productList.length / productsPerPage);
+    fetchProducts();
+  }, [categoryForAPI, page, productsPerPage]);
 
   return (
     <>
@@ -59,8 +56,8 @@ export const GenericShopping: React.FC = () => {
         </Grid>
         <Grid item md={12}>
           <Grid container spacing={2}>
-            {Array.isArray(productList) ? (
-              productList.map((product: any, index: number) => (
+            {productList.length > 0 ? (
+              productList.map((product: Product, index: number) => (
                 <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
                   <ProductDisplay product={product} />
                 </Grid>
@@ -86,15 +83,15 @@ export const GenericShopping: React.FC = () => {
                 variant="contained"
                 color="primary"
                 disabled={page === 0}
-                onClick={() => handleChangePage(undefined, page - 1)}
+                onClick={() => handleChangePage(page - 1)}
               >
                 Previous
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                disabled={slicedProductList.length < productsPerPage}
-                onClick={() => handleChangePage(undefined, page + 1)}
+                disabled={page + 1 >= totalPageCount}
+                onClick={() => handleChangePage(page + 1)}
                 style={{ marginLeft: "10px" }}
               >
                 Next

@@ -10,4 +10,6 @@ export interface Product {
   product_category: string;
   product_availability: number;
   product_image: string;
+  product_price_formatted: string;
+  product_orders_in_cart: number;
 }

@@ -44,7 +44,8 @@
 }
 
 @keyframes fadeInOut {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -69,8 +70,8 @@
   margin-right: 25px;
   border-radius: 5px;
   padding: 10px;
-  color: black;
-  background-color: #ffffffbe;
+  color: white;
+  background-color: #2c2c2cbe;
   backdrop-filter: blur(5px);
   opacity: 0;
   visibility: hidden;
@@ -80,7 +81,7 @@
 .category-content.active {
   opacity: 1;
   visibility: visible;
-  width: 14vw;
+  width: auto;
   z-index: 1;
   animation: fadeInAnimation 0.3s ease-in-out, fadeInOutContent 0.3s ease-in-out;
 }
@@ -96,7 +97,7 @@
 
 .aboutyou-content {
   min-height: 100%;
-  margin-top: 1vh;
+  margin-top: 10vh;
   margin-bottom: 5vh;
   margin-left: 16vw;
   margin-right: 16vw;
@@ -135,6 +136,8 @@
 
 .typography-custom {
   color: white;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .footer {
@@ -179,7 +182,6 @@
   transition: opacity 0.5s ease, visibility 0s linear;
 }
 
-
 .productContainer .MuiCardMedia-img {
   transition: transform 0.3s ease-in-out;
 }
@@ -217,4 +219,11 @@
 
 .clickableCard {
   cursor: pointer;
+}
+
+.video-border {
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }

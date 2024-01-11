@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Typography,
   List,
@@ -13,29 +13,40 @@ import {
   Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Product } from "../../redux/types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store/store";
+import { removeFromCart } from "../../redux/slice/cartSlice";
 
-interface ShoppingCartProps {
-  cartItems: Product[];
-  removeFromCart: (id: number) => void;
-}
+export const ShoppingCart: React.FC = () => {
+  const cartItems = useSelector((state: RootState) => state.cart.products);
+  const dispatch = useDispatch();
 
-export const ShoppingCart: React.FC<ShoppingCartProps> = ({
-  cartItems,
-  removeFromCart,
-}) => {
   const [orderNumber, setOrderNumber] = useState<number | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState<boolean>(false);
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.product_price * item.product_availability,
-    0
-  );
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce(
+      (total, item) => total + item.product_price * item.product_orders_in_cart,
+      0
+    );
+  }, [cartItems]);
 
   const handleOrderConfirm = () => {
     const randomOrderNumber = Math.floor(Math.random() * 100000);
     setOrderNumber(randomOrderNumber);
     setOrderConfirmed(true);
-    removeFromCart(-1);
+  };
+
+  const formatProductPrice = (price: number) => {
+    const decimalFormat = new Intl.NumberFormat("hr-HR", {
+      style: "currency",
+      currency: "EUR",
+      minimumFractionDigits: 2,
+    });
+    return decimalFormat.format(price);
+  };
+
+  const handleRemoveFromCart = (itemId: number) => {
+    dispatch(removeFromCart(itemId));
   };
 
   return (
@@ -65,15 +76,9 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
                         className="text"
                         color="textPrimary"
                       >
-                        Količina: {item.product_availability}
+                        Količina: {item.product_orders_in_cart}
                       </Typography>
-                      <Typography
-                        variant="body2"
-                        className="text"
-                        color="textPrimary"
-                      >
-                        Cijena: {item.product_price * item.product_availability}€
-                      </Typography>
+                      <Typography variant="body2">{`Cijena: ${item.product_price_formatted}`}</Typography>
                     </React.Fragment>
                   }
                 />
@@ -81,7 +86,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => handleRemoveFromCart(item.id)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -101,7 +106,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({
                     className="totalPrice"
                     color="primary"
                   >
-                    Ukupna cijena: {totalPrice}€
+                    Ukupna cijena: {formatProductPrice(totalPrice)}
                   </Typography>
                 }
               />

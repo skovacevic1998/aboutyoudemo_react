@@ -4,21 +4,12 @@ import {
   FooterComponent,
   GenericShopping,
   Homepage,
-  Navbar,
+  NavbarV2,
   ShoppingCart,
 } from "./components";
 import "./css/custom_style.css";
-import { Product } from "./redux/types/types";
 
 function App(): JSX.Element {
-  const [cartItems, setCartItems] = useState<Product[]>([
-    
-  ]);
-  const removeFromCart = (id: number) => {
-    const updatedCart = id === -1 ? [] : cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedCart);
-  };
-
   const [contentState, setContentState] = useState<{
     visible: boolean;
     content: React.ReactNode | null;
@@ -86,7 +77,8 @@ function App(): JSX.Element {
     <Router>
       <div className="App">
         <div className="background" />
-        <Navbar handleShowCategoryContent={handleShowCategoryContent} />
+        {/*<Navbar handleShowCategoryContent={handleShowCategoryContent} /> */}
+        <NavbarV2 handleShowCategoryContent={handleShowCategoryContent} />
         {buttonClicked && (
           <div
             ref={contentRef}
@@ -102,15 +94,7 @@ function App(): JSX.Element {
             <Route path="/" element={<Homepage />} />
             <Route path="/profile" element={<div>Profile</div>} />
             <Route path="/favorites" element={<div>Favorite</div>} />
-            <Route
-              path="/shoppingcart"
-              element={
-                <ShoppingCart
-                  cartItems={cartItems}
-                  removeFromCart={removeFromCart}
-                />
-              }
-            />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/Djeca/Obuća" element={<GenericShopping />} />
             <Route path="/Djeca/Patike" element={<GenericShopping />} />
           </Routes>

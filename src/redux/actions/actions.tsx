@@ -3,6 +3,7 @@ import { RootState } from "../store/store";
 import { Action } from "redux";
 import axios from "axios";
 import { setCategoryData } from "../slice/categorySlice";
+import { setProductsData } from "../slice/productsSlice";
 
 export const fetchCategoryData = (
   label: string
@@ -14,9 +15,7 @@ export const fetchCategoryData = (
       );
       const data = response.data;
       dispatch(setCategoryData({ label, data }));
-    } catch (error) {
-      // Handle errors
-    }
+    } catch (error) {}
   };
 };
 
@@ -29,9 +28,7 @@ export const fetchProductsData = (
         `http://localhost:8080/api/products/${label}`
       );
       const data = response.data;
-      dispatch(setCategoryData({ label, data }));
-    } catch (error) {
-      // Handle errors
-    }
+      dispatch(setProductsData({ label, data }));
+    } catch (error) {}
   };
 };

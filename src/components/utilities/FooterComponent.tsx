@@ -1,18 +1,18 @@
-import React from 'react';
-import { Layout, Row, Col, Typography, Divider } from 'antd';
+import React from "react";
+import { Layout, Row, Col, Typography, Divider } from "antd";
 import {
   FacebookOutlined,
   InstagramOutlined,
   TwitterOutlined,
   YoutubeOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 const { Footer } = Layout;
 const { Title, Text } = Typography;
 
 export const FooterComponent: React.FC = () => {
   return (
-    <Footer style={{ backgroundColor: '#f0f0f0', bottom: 0, width: '100%' }}>
+    <Footer style={{ backgroundColor: "#f0f0f0", bottom: 0, width: "100%" }}>
       <Row justify="center" align="middle">
         <Col span={24}>
           <Row justify="center">
@@ -58,9 +58,10 @@ export const FooterComponent: React.FC = () => {
           </Row>
           <Divider />
           <Row justify="center">
-            <Col span={24} style={{ textAlign: 'center' }}>
+            <Col span={24} style={{ textAlign: "center" }}>
               <Text>
-                &copy; {new Date().getFullYear()} AboutYou Webstore. All Rights Reserved.
+                &copy; {new Date().getFullYear()} AboutYou Webstore. All Rights
+                Reserved.
               </Text>
             </Col>
           </Row>

@@ -68,7 +68,6 @@ const ImageRow3: React.FC = React.memo(() => {
 });
 
 export const CustomCarousel: React.FC = () => {
-
   return (
     <div>
       <Carousel autoplay>
