@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
+  AnimatedBackground,
   FooterComponent,
   GenericShopping,
   Homepage,
@@ -76,7 +77,7 @@ function App(): JSX.Element {
   return (
     <Router>
       <div className="App">
-        <div className="background" />
+        <AnimatedBackground />
         {/*<Navbar handleShowCategoryContent={handleShowCategoryContent} /> */}
         <NavbarV2 handleShowCategoryContent={handleShowCategoryContent} />
         {buttonClicked && (

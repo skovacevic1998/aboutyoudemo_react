@@ -10,3 +10,4 @@ export { ProductDisplay } from "./utilities/ProductDisplay";
 export { GenericShopping } from "./pages/GenericShopping";
 export { NavbarV2 } from "./utilities/NavbarV2";
 export { CustomVideo } from "./utilities/CustomVideo";
+export { AnimatedBackground } from "./utilities/AnimatedBackground";
